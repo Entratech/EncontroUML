@@ -44,7 +44,7 @@ static void Main(string[] args)
 
             end.logradouro = "Rua Salvador Bercari";
             end.numero = 7;
-            end.complemento = "Na rua da auto-escola";
+            end.complemento = "Na rua da auto escola";
             end.enderecoComercial = false;
 
             PessoaFisica novapf = new PessoaFisica();
@@ -52,7 +52,7 @@ static void Main(string[] args)
             novapf.endereco = end;
             novapf.cpf="123456789";
             novapf.dataNascimento = new DateTime(2001,08,11);
-            novapf.nome = "Daniel Josua";
+            novapf.nome = "João Vitor";
 
             PessoaFisica pf = new PessoaFisica();
             pf.ValidarDataNascimento(pf.dataNascimento);
