@@ -14,9 +14,12 @@ namespace Encontroremoto
 
             double anos = (dataAtual - dataNasc).TotalDays / 365;
 
-            if(anos<=18){
+            if(anos<=18)
+            {
                 return true;
-            }else{
+            }
+            else
+            {
                 return false;
             }
         }
