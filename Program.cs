@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace Encontroremoto
 {
@@ -7,6 +8,9 @@ namespace Encontroremoto
     {   
 static void Main(string[] args)
         {
+
+            List<PessoaFisica> listaPF = new List<PessoaFisica>();
+
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.BackgroundColor = ConsoleColor.White;
@@ -25,10 +29,18 @@ static void Main(string[] args)
             {
                 Console.WriteLine(@$"
 ======================================
-|            1 - Pessoa Física       |
-|            2 - Pessoa Jurìdica     |
+|   Escolha uma das opções abaixo    |  
+|         PESSOA FÍSICA              |                               
+|     1 - Cadastrar pessoa física    |
+|     2 - Listar pessoa física       |  
+|     3 - Remover pessoa física      |
 |                                    |
-|            0 - Sair                |
+|         PESSOA JURÍDICA            |
+|     4 - Cadastrar pessoa jurídica  |
+|     5 - Listar pessoa jurídica     |
+|     6 - Remover pessoa jurídica    |
+|                                    |
+|              0 - Sair              |
 ======================================
 ");
             opcao = Console.ReadLine();
@@ -39,18 +51,38 @@ static void Main(string[] args)
                 
                 Endereco endPF = new Endereco();
 
-            endPF.logradouro = "Rua Salvador Bercari";
-            endPF.numero = 7;
-            endPF.complemento = "Na rua da auto escola";
-            endPF.enderecoComercial = false;
+            Console.WriteLine($"Digite seu logradouro");
+            endPF.logradouro = Console.ReadLine();
+
+            Console.WriteLine($"Digite o número");
+            endPF.numero = int.Parse(Console.ReadLine());
+
+            Console.WriteLine($"Digite o complemento (aperte ENTER para vazio");
+            endPF.complemento = Console.ReadLine();
+
+            Console.WriteLine($"Este endereço é comercial S/N");
+            string endComercial = Console.ReadLine().ToUpper();
+            
+            if (endComercial == "S")
+            {
+                endPF.enderecoComercial = true;
+            }
+            else
+            {
+                endPF.enderecoComercial = false;
+            }
 
             PessoaFisica novapf = new PessoaFisica();
-
-            novapf.endereco = endPF;
-            novapf.cpf="123456789";
-            novapf.rendimento = 1500;
-            novapf.dataNascimento = new DateTime(2001,08,11);
-            novapf.nome = "João Vitor";
+            
+           Console.WriteLine($"Digite seu CPF (somente números");
+           novapf.cpf = Console.ReadLine();
+           
+           Console.WriteLine($"Digite seu nome");
+           novapf.nome = Console.ReadLine();
+         
+           Console.WriteLine($"Digite sua data de nascimento");
+           novapf.dataNascimento = DateTime.Parse(Console.ReadLine());
+            
 
             
 
@@ -64,7 +96,10 @@ static void Main(string[] args)
 
             if(idadeValida == true)
             {
-                Console.WriteLine($"Cadastro aprovado");
+                System.Console.WriteLine($"Cadastro aprovado");
+                listaPF.Add(novapf);
+                Console.WriteLine(pf.PagarImposto(novapf.rendimento));
+                
             }
             else
             {
@@ -72,7 +107,34 @@ static void Main(string[] args)
             }
                     break;
                    
-                    case "2": 
+                    case "2":
+                    foreach (var cadaItem in listaPF)
+                    {
+                        Console.WriteLine($"{cadaItem.nome}, {cadaItem.cpf}, {cadaItem.dataNascimento}");
+                    }
+
+                    break;
+
+                    case "3":
+
+                    Console.WriteLine($"Digite o CPF que deseja remover");
+                    string cpfProcurado = Console.ReadLine();
+
+                    PessoaFisica pessoaEncontrada = listaPF.Find(cadaItem => cadaItem.cpf == cpfProcurado);
+                    
+                    if (pessoaEncontrada != null)
+                    {
+                        listaPF.Remove(pessoaEncontrada);
+                        Console.WriteLine($"Cadastro Removido");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"CPF não encontrado");
+                    }
+
+                    break;
+                    
+                    case "4": 
             
             
             PessoaJuridica pj = new PessoaJuridica();
